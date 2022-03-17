@@ -34,4 +34,7 @@ urlpatterns = [
 
     #del
     path('todo/<int:todo_pk>/delete', views.deletetodo, name='deletetodo'),
+
+    #completed to watch
+    path('completed/', views.completedtodos, name='completedtodos'),
 ]
