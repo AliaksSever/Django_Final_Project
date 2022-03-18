@@ -13,9 +13,9 @@ def home(request):
     return render(request, 'todo/home.html')
 
 
-def singupuser(request):
+def signupuser(request):
     if request.method == 'GET':
-        return render(request, 'todo/singupuser.html', {'form': UserCreationForm()})
+        return render(request, 'todo/signupuser.html', {'form': UserCreationForm()})
     else:
         if request.POST['password1'] == request.POST['password2']:
             try:
@@ -25,11 +25,11 @@ def singupuser(request):
                 return redirect('currenttodos')
             except IntegrityError:
                 error = 'That username has already been taken. Please choose a new username'
-                return render(request, 'todo/singupuser.html', {'form': UserCreationForm(),
+                return render(request, 'todo/signupuser.html', {'form': UserCreationForm(),
                                                                 'error': error})
         else:
             error = 'Password did not match'
-            return render(request, 'todo/singupuser.html', {'form': UserCreationForm(),
+            return render(request, 'todo/signupuser.html', {'form': UserCreationForm(),
                                                             'error': error})
 
 
