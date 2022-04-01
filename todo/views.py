@@ -119,17 +119,17 @@ def deletetodo(request, todo_pk):
         return redirect('currenttodos')
 
 
-
+@login_required
 def tags(request):
     tags = Tag.objects.all()
     return render(request, 'todo/tags.html', {'tags':tags})
 
-
+@login_required
 def tag_detail(request, slug):
     tag = Tag.objects.get(slug__iexact=slug)
     return render(request, 'todo/tag_detail.html', {'tag':tag})
 
-
+@login_required
 def tag_create(request):
     if request.method == 'GET':
         return render(request, 'todo/tag_create.html', {'form': TagForm()})
