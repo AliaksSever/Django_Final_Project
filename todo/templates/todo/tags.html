@@ -22,7 +22,12 @@
         <br>
         <a role="button" class="btn btn-primary" href="#">Create Tag</a>
         </div>
-    {% endif %}
+    {% endif %}<br>
+    <div class="text-center">
+        <h2>Want to add new tag?</h2>
+    <br>
+    <a role="button" class="btn btn-primary" href="{% url 'tag_create' %}">Create new tag</a>
+    </div>
     </div>
 </div>
 

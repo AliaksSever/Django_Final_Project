@@ -11,6 +11,12 @@
             <div class="list-group">
                 {% for todo in todos %}
                     <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b> - Completed {{ todo.datecompleted|date:'M j Y H:i' }}</a>
+                    <div class="card-footer text-muted">
+                        Tags:
+                        {% for tag in todo.tags.all %}
+                            <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+                        {% endfor %}
+                    </div><br>
                 {% endfor %}
             </div>
         </div>
