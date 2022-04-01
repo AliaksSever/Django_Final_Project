@@ -13,7 +13,7 @@
     {% if tag %}
         <div class="list-group">
             {% for todo in tag.todos.all %}
-                <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</a>
+                <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</a><br>
             {% endfor %}
         </div>
     {% else %}
@@ -23,6 +23,7 @@
         <a role="button" class="btn btn-primary" href="{% url 'createtodo' %}">Create Todo</a>
         </div>
     {% endif %}
+    <a href="{% url 'tag_update' slug=tag.slug %}" class="btn btn-primary">Update this Tag</a>
     </div>
 </div>
 

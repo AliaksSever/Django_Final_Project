@@ -42,4 +42,5 @@ urlpatterns = [
     path('tags/', views.tags, name='tags'),
     path('tag/create', views.tag_create, name='tag_create'),
     path('tag/<str:slug>/', views.tag_detail, name='tag_detail'),
+    path('tag/<str:slug>/update/', views.tag_update, name='tag_update'),
 ]

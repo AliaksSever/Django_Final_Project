@@ -146,9 +146,19 @@ def tag_create(request):
             return render(request, 'todo/tag_create.html', {'form': form})
 
 
-def new():
-    pass
-
+#UPDATING THE TAG
+def tag_update(request, slug):
+    tag = get_object_or_404(Tag, slug__iexact=slug)
+    if request.method == 'GET':
+        form = TagForm(instance=tag)
+        return render(request, 'todo/tag_update.html', {'tag':tag, 'form':form})
+    else:
+        try:
+            form = TagForm(request.POST, instance=tag)
+            form.save()
+            return redirect('tags')
+        except ValueError:
+            return render(request, 'todo/tag_update.html', {'tag': tag, 'form': form})
 
 
 # @login_required
