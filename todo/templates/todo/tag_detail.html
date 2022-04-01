@@ -24,7 +24,7 @@
         </div>
     {% endif %}
     <a href="{% url 'tag_update' slug=tag.slug %}" class="btn btn-primary">Update this Tag</a>
-    <a href="#" class="btn btn-danger">Delete this Tag</a>
+    <a href="{% url 'tag_delete' slug=tag.slug %}" class="btn btn-danger">Delete this Tag</a>
     </div>
 </div>
 

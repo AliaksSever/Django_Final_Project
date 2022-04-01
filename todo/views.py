@@ -161,6 +161,15 @@ def tag_update(request, slug):
             return render(request, 'todo/tag_update.html', {'tag': tag, 'form': form})
 
 
+def tag_delete(request, slug):
+    tag = get_object_or_404(Tag, slug__iexact=slug)
+    if request.method == 'GET':
+        return render(request, 'todo/tag_delete.html', {'tag':tag})
+    else:
+        tag.delete()
+        return redirect('tags')
+
+
 # @login_required
 # def tag_create(request):
 #     if request.method == 'GET':

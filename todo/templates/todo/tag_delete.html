@@ -1,0 +1,25 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
+
+                 <h1>Are you sure you want to delete this Tag?</h1>
+            <p>You will no longer be able to track and add ToDos under this Tag until you create it again</p>
+            <!-- action="{% url 'tag_delete' slug=tag.slug %}" -->
+        <form method="POST"> 
+            {% csrf_token %}
+            <a href="{% url 'tag_detail' slug=tag.slug %}" class="btn btn-primary">Back</a>
+            <button class="btn btn-danger" type="submit">Yes, I'm sure</button>
+        </form>
+
+        </div>
+    </div>
+
+{% endblock %}
