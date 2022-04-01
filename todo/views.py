@@ -131,28 +131,31 @@ def tag_detail(request, slug):
     tag = Tag.objects.get(slug__iexact=slug)
     return render(request, 'todo/tag_detail.html', {'tag':tag})
 
-@login_required
+
 def tag_create(request):
     if request.method == 'GET':
         return render(request, 'todo/tag_create.html', {'form': TagForm()})
     else:
-        form = TagForm(request.POST)
-        if form.is_valid():
+        try:
+            form = TagForm(request.POST)
             new_tag = form.save(commit=False)
             new_tag.user = request.user
             new_tag.save()
             return redirect(new_tag)
-        return render(request, 'todo/tag_create.html', {'form': form})
+        except ValueError:
+            return render(request, 'todo/tag_create.html', {'form': form})
 
 
 
-
-        # try:
-        #     form = TodoForm(request.POST)
-        #     newtodo = form.save(commit=False)
-        #     newtodo.user = request.user
-        #     newtodo.save()
-        #     return redirect('currenttodos')
-        # except ValueError:
-        #     return render(request, 'todo/createtodo.html', {'form': TodoForm(),
-        #                                                     'error': error})
+# @login_required
+# def tag_create(request):
+#     if request.method == 'GET':
+#         return render(request, 'todo/tag_create.html', {'form': TagForm()})
+#     else:
+#         form = TagForm(request.POST)
+#         if form.is_valid():
+#             new_tag = form.save(commit=False)
+#             new_tag.user = request.user
+#             new_tag.save()
+#             return redirect(new_tag)
+#         return render(request, 'todo/tag_create.html', {'form': form})
