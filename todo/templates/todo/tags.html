@@ -13,7 +13,7 @@
     {% if tags %}
         <div class="list-group">
             {% for tag in tags %}
-                <a href="#" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ tag.title }}</a>
+                <a href="{{ tag.get_absolute_url }}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ tag.title }}</a>
             {% endfor %}
         </div>
     {% else %}
