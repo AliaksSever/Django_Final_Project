@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
-from .forms import TodoForm, TagForm
+from .forms import TagForm, TodoForm
 from .models import Todo, Tag
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -65,6 +65,8 @@ def createtodo(request):
             newtodo = form.save(commit=False)
             newtodo.user = request.user
             newtodo.save()
+            for tag in form.cleaned_data['tags']:
+                newtodo.tags.add(tag)
             return redirect('currenttodos')
         except ValueError:
             return render(request, 'todo/createtodo.html', {'form': TodoForm(),
