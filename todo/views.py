@@ -146,6 +146,10 @@ def tag_create(request):
             return render(request, 'todo/tag_create.html', {'form': form})
 
 
+def new():
+    pass
+
+
 
 # @login_required
 # def tag_create(request):
