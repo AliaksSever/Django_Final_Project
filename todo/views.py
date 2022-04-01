@@ -123,15 +123,17 @@ def deletetodo(request, todo_pk):
 
 @login_required
 def tags(request):
-    tags = Tag.objects.all()
+    tags = Tag.objects.filter(user=request.user)
     return render(request, 'todo/tags.html', {'tags':tags})
+
 
 @login_required
 def tag_detail(request, slug):
-    tag = Tag.objects.get(slug__iexact=slug)
+    tag = Tag.objects.get(slug__iexact=slug, user= request.user)
     return render(request, 'todo/tag_detail.html', {'tag':tag})
 
 
+@login_required
 def tag_create(request):
     if request.method == 'GET':
         return render(request, 'todo/tag_create.html', {'form': TagForm()})
@@ -146,9 +148,9 @@ def tag_create(request):
             return render(request, 'todo/tag_create.html', {'form': form})
 
 
-#UPDATING THE TAG
+@login_required
 def tag_update(request, slug):
-    tag = get_object_or_404(Tag, slug__iexact=slug)
+    tag = get_object_or_404(Tag, slug__iexact=slug, user= request.user)
     if request.method == 'GET':
         form = TagForm(instance=tag)
         return render(request, 'todo/tag_update.html', {'tag':tag, 'form':form})
@@ -161,8 +163,9 @@ def tag_update(request, slug):
             return render(request, 'todo/tag_update.html', {'tag': tag, 'form': form})
 
 
+@login_required
 def tag_delete(request, slug):
-    tag = get_object_or_404(Tag, slug__iexact=slug)
+    tag = get_object_or_404(Tag, slug__iexact=slug, user= request.user)
     if request.method == 'GET':
         return render(request, 'todo/tag_delete.html', {'tag':tag})
     else:
