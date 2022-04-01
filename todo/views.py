@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
-from .forms import TodoForm
-from .models import Todo
+from .forms import TodoForm, TagForm
+from .models import Todo, Tag
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
@@ -117,3 +117,40 @@ def deletetodo(request, todo_pk):
     if request.method == 'POST':
         todo.delete()
         return redirect('currenttodos')
+
+
+
+def tags(request):
+    tags = Tag.objects.all()
+    return render(request, 'todo/tags.html', {'tags':tags})
+
+
+def tag_detail(request, slug):
+    tag = Tag.objects.get(slug__iexact=slug)
+    return render(request, 'todo/tag_detail.html', {'tag':tag})
+
+
+def tag_create(request):
+    if request.method == 'GET':
+        return render(request, 'todo/tag_create.html', {'form': TagForm()})
+    else:
+        form = TagForm(request.POST)
+        if form.is_valid():
+            new_tag = form.save(commit=False)
+            new_tag.user = request.user
+            new_tag.save()
+            return redirect(new_tag)
+        return render(request, 'todo/tag_create.html', {'form': form})
+
+
+
+
+        # try:
+        #     form = TodoForm(request.POST)
+        #     newtodo = form.save(commit=False)
+        #     newtodo.user = request.user
+        #     newtodo.save()
+        #     return redirect('currenttodos')
+        # except ValueError:
+        #     return render(request, 'todo/createtodo.html', {'form': TodoForm(),
+        #                                                     'error': error})

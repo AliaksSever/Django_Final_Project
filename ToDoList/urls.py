@@ -37,4 +37,9 @@ urlpatterns = [
 
     #completed to watch
     path('completed/', views.completedtodos, name='completedtodos'),
+
+    #tags
+    path('tags/', views.tags, name='tags'),
+    path('tag/create', views.tag_create, name='tag_create'),
+    path('tag/<str:slug>/', views.tag_detail, name='tag_detail'),
 ]
