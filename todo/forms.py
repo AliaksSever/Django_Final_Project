@@ -15,7 +15,7 @@ class TodoForm(ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'memo': forms.Textarea(attrs={'class': 'form-control'}),
             'important': forms.CheckboxInput(attrs={'class': 'form-check-label'}),
-            'tags': forms.SelectMultiple(attrs={'class': 'form-control'})
+            'tags': forms.CheckboxSelectMultiple(attrs={'class': 'checkbox'})
         }
 
 

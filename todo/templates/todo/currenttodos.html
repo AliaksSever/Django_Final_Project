@@ -19,7 +19,7 @@
                     <div class="card-footer text-muted">
                         Tags:
                         {% for tag in todo.tags.all %}
-                            <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+                            <a href="{{ tag.get_absolute_url }}">#{{ tag.title }}</a>
                         {% endfor %}
                     </div><br>
                 {% endfor %}
