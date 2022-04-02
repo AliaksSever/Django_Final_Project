@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-class Person(models.Model):
+class Account(models.Model):
     MALE = 'ML'
     FEMALE = 'FM'
     OTHER = 'OT'
@@ -24,3 +24,7 @@ class Person(models.Model):
     job = models.CharField(max_length=20, blank=True)
     about = models.TextField(blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+
+    def __str__(self) -> str:
+        return self.first_name
