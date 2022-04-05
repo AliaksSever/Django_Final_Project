@@ -2,4 +2,12 @@
 
 {% block content %}
     <h1>Account page</h1>
+    {% if account %}
+        {% for field in account %}
+            {{ field.age }}
+        {% endfor  %}
+
+    {% else %}
+        <h3>No personal information for your account yet. Want to add?</h3>
+    {% endif %}
 {% endblock %}
