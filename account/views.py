@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Account
+from .forms import AccountForm
 
 # def account_view(request):
 #     account = Account.objects.filter(user=request.user)
@@ -7,7 +8,19 @@ from .models import Account
 
 
 def account_view(request):
-    pass 
+    error = 'Bad data passed in. Plese try again.'
+    if request.method == 'GET':
+        return render(request, 'account/account.html', {'form':AccountForm()})
+    else:
+        try:
+            form = AccountForm(request.POST)
+            info = form.save(commit=False)
+            info.user = request.user
+            info.save()
+            return redirect('currenttodos')
+        except ValueError:
+            return render(request, 'account/account.html', {'form':AccountForm(), 'error':error})
+
 
 # @login_required
 # def viewtodo(request, todo_pk):
