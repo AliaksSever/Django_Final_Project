@@ -1,28 +1,28 @@
 {% extends "todo/base.html" %}
 
 {% block content %}
-    <h1>Account page</h1>
-    {{ error }}
     <div class="row justify-content-center mt-5">
-        <div class="col-md-5">
-            <h2>Add personal information</h2>
+        <div class="col-md-10">
+            <h1>Personal information</h1>
         </div>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-md-5">
-            <form class="mb-3" method="POST">
-                {% csrf_token %}
-                
-                {% for field in form %}
-
-                    <div class="form-group">
-                        {{ field.label }}
-                        {{ field }}
-                    </div>         
-
+        <div class="col-md-10">
+        {% if account %}
+        <h1>TEST THERE IS ACC INFO</h1>
+            <div class="list-group">
+                {% for info in account %}
+                <!-- 'viewtodo' todo.id -->
+                    <a href="{% url 'account_view' %}" class="list-group-item list-group-item-action"><b>{{ info.first_name }}</b>{% if info.last_name %} - {{ info.last_name }}{% endif %}</a><br>
                 {% endfor %}
-                <button type="submit" class="btn btn-primary">Save</button>
-            </form>
+            </div>
+        {% else %}
+            <div class="text-center">
+                <h2>Looks like you don't have any personal information! Want to add?</h2>
+            <br>
+            <a role="button" class="btn btn-primary" href="{% url 'account_view' %}">Add personal information</a>
+            </div>
+        {% endif %}
         </div>
     </div>
 {% endblock %}

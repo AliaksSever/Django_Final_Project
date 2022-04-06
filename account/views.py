@@ -10,7 +10,7 @@ from .forms import AccountForm
 def account_view(request):
     error = 'Bad data passed in. Plese try again.'
     if request.method == 'GET':
-        return render(request, 'account/account.html', {'form':AccountForm()})
+        return render(request, 'account/account_view.html', {'form':AccountForm()})
     else:
         try:
             form = AccountForm(request.POST)
@@ -19,7 +19,16 @@ def account_view(request):
             info.save()
             return redirect('currenttodos')
         except ValueError:
-            return render(request, 'account/account.html', {'form':AccountForm(), 'error':error})
+            return render(request, 'account/account_view.html', {'form':AccountForm(), 'error':error})
+
+
+def account(request):
+    account = Account.objects.filter(user=request.user)
+    return render(request, 'account/account.html', {'account': account})
+
+# def tags(request):
+#     tags = Tag.objects.filter(user=request.user)
+#     return render(request, 'todo/tags.html', {'tags':tags})
 
 
 # @login_required
