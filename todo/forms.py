@@ -38,10 +38,3 @@ class TagForm(ModelForm):
         if Tag.objects.filter(slug__iexact=new_slug).count():
             raise ValidationError(f'Slug should be UNIQE. We already have "{new_slug}"')
         return new_slug
-
-    # def save(self):
-    #     new_tag = Tag.objects.create(
-    #         title = self.cleaned_data.get('title'),
-    #         slug = self.cleaned_data.get('slug')
-    #     )
-    #     return new_tag
