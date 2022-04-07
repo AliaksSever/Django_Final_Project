@@ -1,4 +1,5 @@
 {% extends "todo/base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="row justify-content-center mt-5">
@@ -6,23 +7,45 @@
             <h1>Personal information</h1>
         </div>
     </div>
+
+
     <div class="row justify-content-center mt-5">
         <div class="col-md-10">
+
+    <div class="album py-5 bg-light">
+        <div class="container">
         {% if account %}
-        <h1>TEST THERE IS ACC INFO</h1>
-            <div class="list-group">
+          <div class="row">
+            <div class="col">
                 {% for info in account %}
-                <!-- 'viewtodo' todo.id -->
-                    <a href="{% url 'account_view' %}" class="list-group-item list-group-item-action"><b>{{ info.first_name }}</b>{% if info.last_name %} - {{ info.last_name }}{% endif %}</a><br>
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'account/img/account.svg' %}" alt="logo">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ info.first_name }}</h5>
+                      <p class="card-text">There is a card with your personal information you can update or delete any time.<br>To see more of it click on "view"</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      
+                      <li class="list-group-item">Age: {{ info.age }}</li>
+                      <li class="list-group-item">Sex: {{ info.sex }}</li>
+                    </ul>
+                    <div class="card-body">
+                      <a href="{% url 'account_update' %}" class="btn btn-primary">View</a>
+                      <a href="{% url 'account_delete' %}" class="btn btn-danger">Delete</a>
+                    </div>
+                  </div>
                 {% endfor %}
             </div>
-        {% else %}
+          </div>
+          {% else %}
             <div class="text-center">
-                <h2>Looks like you don't have any personal information! Want to add?</h2>
+                <h2>Looks like you don't have any personal information! <br> Want to add?</h2>
             <br>
             <a role="button" class="btn btn-primary" href="{% url 'account_view' %}">Add personal information</a>
             </div>
         {% endif %}
         </div>
-    </div>
+      </div> 
+      </div>
+      </div>
 {% endblock %}

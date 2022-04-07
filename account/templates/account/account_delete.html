@@ -1,0 +1,24 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
+
+                 <h1>Are you sure you want to delete your personal information?</h1>
+            <p>You will no longer be able to get access to this until you fill the form again</p>
+        <form method="POST"> 
+            {% csrf_token %}
+            <a href="{% url 'account' %}" class="btn btn-primary">Back</a>
+            <button class="btn btn-danger" type="submit">Yes, I'm sure</button>
+        </form>
+
+        </div>
+    </div>
+
+{% endblock %}
